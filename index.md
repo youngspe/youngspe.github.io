@@ -1,7 +1,7 @@
 ---
 layout: home
-title: My website
-subtitle: This is where I will tell my friends way too much about me
+title: youngspe
+subtitle: Spencer Young's site
 ---
 
 🚧👷‍♀️ _This site is under construction._ 👷‍♂️🚧
