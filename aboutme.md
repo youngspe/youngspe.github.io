@@ -1,7 +1,7 @@
 ---
 layout: page
 title: About me
-# subtitle: Idk
+subtitle: Spencer Young
 ---
 
-🚧👷‍♀️ _This site is under construction._ 👷‍♂️🚧
+I'm a software developer looking for my next challenge.

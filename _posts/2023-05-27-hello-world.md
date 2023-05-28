@@ -9,6 +9,7 @@ title: Hello, world!
 # cover-img: /assets/img/path.jpg
 # thumbnail-img: /assets/img/thumb.png
 # share-img: /assets/img/path.jpg
+date: 2023-05-27 22:00:00
 ---
 
-🚧👷‍♀️ _This site is under construction._ 👷‍♂️🚧
+On this site I'll share thoughts, experiences, and projects I'm working on.
