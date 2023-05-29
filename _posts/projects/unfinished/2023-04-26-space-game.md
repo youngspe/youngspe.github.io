@@ -4,12 +4,13 @@ title: space-game
 subtitle: An old project
 gh-repo: youngspe/space-game
 # gh-badge: [star, fork, follow]
+gh-badge: [star, follow]
 # tags: [test]
 # comments: true
 # cover-img: /assets/img/path.jpg
 # thumbnail-img: /assets/img/thumb.png
 # share-img: /assets/img/path.jpg
-date: 2023-05-27 23:00:00
+date: 2023-04-26 23:00:00
 ---
 
 
