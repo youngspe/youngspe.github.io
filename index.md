@@ -6,3 +6,7 @@ subtitle: Spencer Young's site
 ---
 
 This is the place for projects and ideas I'd like to share.
+
+### Current status
+
+My current project is a party game using React Native, node, and the OpenAI API. Look for an upcoming post with more details.
