@@ -88,12 +88,12 @@ hr.small {
 ::-moz-selection {
   color: #fff;
   text-shadow: none;
-  background-color: {{ site.hover-col | default: "#0085A1" }};
+  background-color: #35452b;
 }
 ::selection {
   color: #fff;
   text-shadow: none;
-  background-color: {{ site.hover-col | default: "#0085A1" }};
+  background-color: #35452b;
 }
 img::selection {
   color: #fff;
@@ -214,6 +214,12 @@ img {
 
 .dropdown-toggle::after {
   border-width: 0.4em;
+}
+
+@media (min-width: 768px) {
+  p {
+    text-align: justify;
+  }
 }
 
 @media (min-width: 1200px) {
@@ -872,9 +878,9 @@ table tr td :last-child {
 
 code {
   padding: 0.125rem 0.25rem;
-  color: #c7254e;
-  background-color: #f9f2f4;
-  border-radius: 0.25rem;
+  color: #f7ffdf;
+  background-color: #E0FFA020;
+  border-radius: 0.5rem;
 }
 
 pre code {
