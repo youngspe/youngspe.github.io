@@ -1,0 +1,39 @@
+@use "vars" as *;
+
+header.site-header {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
+
+    >nav {
+        overflow-x: auto;
+        margin-inline: calc(0px - var(--margin-x-thin));
+        padding-inline: var(--margin-x-thin);
+
+        >menu {
+            display: flex;
+            flex-flow: row;
+            width: max-content;
+            margin: var(--margin-y) 0;
+            padding: 0;
+            list-style: none;
+
+            >li {
+                width: max-content;
+
+                +li::before {
+                    content: '-';
+                    margin: 0.5em;
+                }
+            }
+        }
+    }
+
+    a.site-title {
+        display: block;
+        font: bolder italic 1rem $title-font-family;
+        color: var(--color-alt-fg);
+        text-shadow: 0 0.09em 0.04em var(--color-shadow-heavy);
+    }
+}

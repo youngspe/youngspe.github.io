@@ -1,0 +1,150 @@
+@use "sass:map";
+
+$dark-theme: (
+    "bg": #162418,
+    "fg": #e8e1d1,
+    "alt-bg": #122a19,
+    "alt-fg": #FFFFFF,
+    "primary": #caaf02,
+    "secondary": #8bac30,
+    "secondary-fade": #9eb482,
+    "shadow": #0e0a02b6,
+    "shadow-heavy": #1a1000ee,
+    "border": #adac8951,
+);
+
+$light-theme: (
+    "bg": #c8d6ac,
+    "fg": #041c11,
+    "alt-bg": #adc283,
+    "alt-fg": #02120e,
+    "primary": #0e2f87,
+    "secondary": #0c6c87,
+    "secondary-fade": #395f5d,
+    "shadow": #074e387d,
+    "shadow-heavy": #1d474362,
+    "border": #043a227a,
+);
+
+$shadow-low: 0 0.125rem 0.375rem -0.0625rem var(--color-shadow);
+$shadow-high: 0 0.225rem 0.75rem -0.125rem var(--color-shadow);
+$margin-default: var(--margin-y) var(--margin-x);
+
+$border-subtle: thin solid var(--color-shadow);
+$border-default: thin solid var(--color-border);
+
+$tiny-width: 360px;
+$xsmall-width: 480px;
+$small-width: 560px;
+$medium-width: 720px;
+$large-width: 1080px;
+$xlarge-width: 1440px;
+
+$body-font-family: system-ui, sans-serif;
+$heading-font-family: Charter, 'Bitstream Charter', 'Sitka Text', Cambria, Times, serif;
+// $title-font-family: Optima, Candara, 'Noto Sans', source-sans-pro, system-ui, sans-serif;
+$title-font-family: $heading-font-family;
+$meta-font-family: $heading-font-family;
+// $meta-font-family: 'Iowan Old Style', 'Palatino Linotype', 'URW Palladio L', P052, serif;
+$caption-font-family: 'Iowan Old Style', 'Palatino Linotype', 'URW Palladio L', P052, serif;
+$code-font-family: 'Cascadia Code', ui-monospace, monospace;
+
+:root {
+    --margin-x: 1rem;
+    --margin-y: 0.5rem;
+
+    --margin-x-thin: 0.5rem;
+    --margin-y-thin: 0.25rem;
+
+    --margin-x-wide: 2rem;
+    --margin-y-wide: 1rem;
+
+    --radius: var(--margin-y-wide);
+    --radius-small: var(--margin-y);
+}
+
+
+@media not (max-width: $medium-width) {
+    :root {
+        --margin-x: 1.5rem;
+        --margin-x-thin: 1rem;
+        --margin-x-wide: 2rem;
+    }
+}
+
+@media not (max-width: $large-width) {
+    :root {
+        --margin-x: 2rem;
+        --margin-y: 0.75rem;
+
+        --margin-x-thin: 1.5rem;
+        --margin-y-thin: 0.375rem;
+
+        --margin-x-wide: 2.5rem;
+        --margin-y-wide: 1.5rem;
+    }
+}
+
+@media (max-width: $small-width) {
+    :root {
+        --margin-x: 0.75rem;
+
+        --margin-x-thin: 0.5rem;
+
+        --margin-x-wide: 1.5rem;
+    }
+}
+
+@media (max-width: $xsmall-width) {
+    :root {
+        --margin-x: 0.375rem;
+        --margin-y: 0.375rem;
+
+        --margin-x-thin: 0.125rem;
+        --margin-y-thin: 0.125rem;
+
+        --margin-x-wide: 0.75rem;
+        --margin-y-wide: 0.75rem;
+    }
+}
+
+@media (max-width: $tiny-width) {
+    :root {
+        --margin-x: 0.25rem;
+        --margin-x-thin: 0.0625rem;
+        --margin-x-wide: 0.5rem;
+    }
+}
+
+@mixin theme-colors($theme) {
+    --color-bg: #{map.get($theme, "bg")};
+    --color-fg: #{map.get($theme, "fg")};
+    --color-alt-bg: #{map.get($theme, "alt-bg")};
+    --color-alt-fg: #{map.get($theme, "alt-fg")};
+    --color-primary: #{map.get($theme, "primary")};
+    --color-secondary: #{map.get($theme, "secondary")};
+    --color-secondary-fade: #{map.get($theme, "secondary-fade")};
+    --color-shadow: #{map.get($theme, "shadow")};
+    --color-shadow-heavy: #{map.get($theme, "shadow-heavy")};
+    --color-border: #{map.get($theme, "border")};
+}
+
+:root {
+    @include theme-colors($light-theme);
+    color-scheme: light;
+
+    --icon-github: url("/assets/icon/github-mark.svg");
+    --icon-npm: url("/assets/icon/npm-logo-black.svg");
+    --icon-linkedin: url("/assets/icon/linkedin-blue.svg");
+}
+
+@media(prefers-color-scheme: dark) {
+    :root {
+        @include theme-colors($dark-theme);
+        color-scheme: dark;
+
+        --icon-github: url("/assets/icon/github-mark-white.svg");
+        --icon-npm: url("/assets/icon/npm-logo-red.svg");
+        --icon-linkedin: url("/assets/icon/linkedin-blue.svg");
+    }
+}

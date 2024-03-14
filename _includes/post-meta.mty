@@ -1,0 +1,65 @@
+.post-meta {
+    time.dt-published[
+    datetime="{{ include.post.date | date_to_xmlschema }}"
+    itemprop=datePublished
+    ]> {{ include.post.date | date: site.date-format }}
+
+    span[itemprop=author itemscope itemtype=http://schema.org/Person]> {
+    by
+    cite.p-author.h-card[itemprop=name]> {{ include.post.author | default: site.author | escape }}
+    }
+
+    {% if include.post.links %}
+    span.post-links> {
+        {% for link in include.post.links %}
+
+        {% if link.text %}
+        <(a[href="{{ link.url }}"]> {{ link.text }} )>
+        {% endif %}
+
+        {% if link.github %}
+        <(a.github-link[
+            href="https://github.com/{{ link.github.user }}/{{ link.github.repo }}"
+        ]> {{ link.github.repo }} )>
+        {% endif %}
+
+        {% if link.npm %}
+        <(a.npm-link[
+            href="https://www.npmjs.com/package/{{ link.npm.package }}"
+        ]> {{ link.npm.package }} )>
+        {% endif %}
+
+        {% endfor %}
+    }
+    {% endif %}
+
+    {% if include.post.categories.size > 0 %}
+    span> {
+        category:
+
+        {% for cat in include.post.categories %}
+        {% capture cat_url -%}
+        /{{ cat | uri_escape }}
+        {%- endcapture %}
+
+        a[href="{{ cat_url | relative_url }}"]> {{ cat }}
+
+        {% unless forloop.last %}/{% endunless %}
+
+        {% endfor %}
+    }
+    {% endif %}
+
+    {% if include.post.tags.size > 0 %}
+    span.post-links> {
+        {% for tag in include.post.tags %}
+        {% capture tag_url -%}
+        /tags/{{ tag | uri_escape }}
+        {%- endcapture %}
+
+        <(a.tag-link[href="{{ tag_url | relative_url }}"]> {{ tag }} )>
+        {% endfor %}
+    }
+    {% endif %}
+
+}

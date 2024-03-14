@@ -1,0 +1,24 @@
+---
+layout: default
+---
+{% convert .mty to .html %}
+
+header.home-header {
+  {% if page.title %}
+  h1.page-heading> {{ page.title }}
+  {% endif %}
+
+  {% if page.subtitle %}
+  .subtitle> {{ page.subtitle }}
+  {% endif %}
+}
+
+section> <[raw[{{ content }}]]>
+
+section {
+  h2.post-list-heading> {{ page.list_title | default: "Posts" }}
+
+  {% include post-list.mty paginator=paginator %}
+}
+
+{% endconvert %}

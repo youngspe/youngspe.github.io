@@ -1,0 +1,107 @@
+@use "vars" as *;
+
+.pill {
+    font-family: $body-font-family;
+    font-style: normal;
+    font-weight: 500;
+
+    display: inline-block;
+    box-shadow: $shadow-low;
+    padding-inline: 0.125em;
+    border-radius: 0.25em;
+    border: $border-subtle;
+    transition: box-shadow 0.5s ease-in-out;
+    text-shadow: none;
+    margin-block: var(--margin-y-thin);
+    margin-inline: 0.125em;
+
+    &:any-link:hover {
+        text-shadow: none;
+        box-shadow: $shadow-high;
+    }
+}
+
+.post-meta {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+    align-items: baseline;
+    font-size: 0.875rem;
+    margin-inline: -0.5em;
+
+    >* {
+        margin-inline: 0.5em;
+    }
+
+    .post-links {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-evenly;
+        align-items: baseline;
+
+        >* {
+            @extend .pill;
+            display: block;
+        }
+    }
+}
+
+.post-list .post-meta {
+    justify-content: space-between;
+
+    >* {
+        justify-content: start;
+    }
+}
+
+.social-link::before {
+    content: "";
+    -webkit-alt: var(--icon-title);
+    alt: var(--icon-title);
+    width: calc(var(--icon-ratio, 1) * 0.5em + 1em);
+    height: 0.75em;
+    display: inline-block;
+    background-image: var(--icon-image);
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    transform: scale(calc(1.33 / sqrt(var(--icon-ratio, 1))));
+    margin-inline: -0.25em 0;
+
+}
+
+a.github-link {
+    @extend .social-link;
+    --icon-title: "on GitHub";
+    --icon-image: var(--icon-github);
+}
+
+a.linkedin-link {
+    @extend .social-link;
+    --icon-title: "on LinkedIn:";
+    --icon-image: var(--icon-linkedin);
+}
+
+a.npm-link {
+    @extend .social-link;
+    --icon-title: "NPM package";
+    --icon-image: var(--icon-npm);
+    --icon-ratio: 3;
+}
+
+a.tag-link::before {
+    content: "#";
+    -webkit-alt: "tag:";
+    alt: "tag:";
+}
+
+
+@supports (content: "a" / "b") {
+    .social-link::before {
+        content: "" / var(--icon-title);
+    }
+
+    a.tag-link::before {
+        content: "#" / "tag:";
+    }
+}

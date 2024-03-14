@@ -2,7 +2,13 @@
 layout: home
 title: youngspe
 subtitle: Spencer Young's site
-# date: 2023-05-27 14:40:45
+pagination:
+    enabled: true
+    trail:
+        before: 2
+        after: 2
 ---
 
-<p>This is the place for projects and ideas I'd like to share.</p>
+{%- convert .mty -%}
+This is the place for projects and ideas I'd like to share.
+{%- endconvert -%}

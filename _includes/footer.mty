@@ -1,0 +1,30 @@
+footer.site-footer.h-card {
+  data.u-url[href='{{ '/' | relative_url }}']>
+
+  .contact {
+    ul.contact-links {
+      {% for link in site.contact %}
+
+      {% if link.github %}
+      > {
+        a.github-link[
+          href='https://github.com/{{link.github.user}}'
+        ]> {{ link.github.user }}
+      }
+      {% endif %}
+
+      {% if link.linkedin %}
+      > {
+        a.linkedin-link[
+          href='https://www.linkedin.com/in/{{link.linkedin.user}}'
+        ]> {{ link.linkedin.user }}
+      }
+      {% endif %}
+
+      {% endfor %}
+    }
+
+    span.copyright> © {{ site.time | date: '%Y' }}
+    <(.p-name> Spencer Young)>
+  }
+}

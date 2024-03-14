@@ -1,0 +1,14 @@
+{
+    "name": "youngspe-pages",
+    "scripts": {
+        "build": "tsc -p _node_tools/tsconfig.json",
+        "convert-mintyml": "node ./_node_tools/convert-mintyml.js"
+    },
+    "devDependencies": {
+        "@types/node": "^20.11.25",
+        "typescript": "^5.4.2"
+    },
+    "dependencies": {
+        "mintyml": "^0.1.3"
+    }
+}

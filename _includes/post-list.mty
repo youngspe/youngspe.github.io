@@ -1,0 +1,42 @@
+ul.post-list {
+  {% for post in include.paginator.posts %}
+    li>article {
+      h3>a.post-link[href="{{ post.url | relative_url }}"]> {{ post.title | escape }}
+
+      footer {
+        {% include post-meta.mty post=post %}
+      }
+      <[raw[ {{- post.excerpt -}} ]]>
+    }
+  {% endfor %}
+}
+
+footer.post-list-footer {
+  span>page {{ include.paginator.page }} of {{ include.paginator.total_pages }}
+
+  {% if include.paginator.total_pages > 1 %}
+  menu.page-nav {
+    {% if include.paginator.previous_page %}
+    >a[
+      href="{{ include.paginator.previous_page_path | prepend: site.baseurl }}"
+      title="previous page"
+    ].prev-link>
+    {% endif %}
+
+    {% if include.paginator.page_trail %}{% for trail in include.paginator.page_trail %}
+
+    {% if include.paginator.page == trail.num %}.selected{% endif %}> {
+      a[href="{{ trail.path | prepend: site.baseurl }}" title="{{ trail.title }}"]> {{ trail.num }}
+    }
+
+    {% endfor %}{% endif %}
+
+    {% if include.paginator.next_page %}
+    >a[
+      href="{{ include.paginator.next_page_path | prepend: site.baseurl }}"
+      title="next page"
+    ].next-link>
+    {% endif %}
+  }
+  {% endif %}
+}
