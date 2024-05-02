@@ -1,0 +1,262 @@
+---
+layout: post
+title: Introducing MinTyML
+subtitle: Minimalist alternative syntax for HTML
+image:
+    path: https://raw.githubusercontent.com/youngspe/mintyml/main/assets/mintyml-logo.svg
+    title: MinTyML Logo
+    show: true
+date: 2024-05-02T10:00
+links:
+  - text: Playground/Demo
+    url: https://youngspe.github.io/mintyml
+  - github:
+      user: youngspe
+      repo: mintyml
+  - npm:
+      package: mintyml
+---
+<! cspell: disable !>
+MinTyML (from <(dfn> <_Min_>imalist H<_TML_>)>) is an alternative
+<! cspell: enable !>
+syntax for HTML designed for writing text-heavy documents.
+
+You can play with the
+<(a[href=https://youngspe.github.io/mintyml]> live demo)>,
+or check out the
+<(a[href=https://github.com/youngspe/mintyml]> Github repository)>
+with a full README
+and information on the Rust-based MinTyML CLI,
+the <`mintyml`> Rust crate,
+the <`mintyml`> NPM package,
+and the MinTyML VSCode extension.
+
+Here's a quick sample:
+
+```
+h1> MinTyML Example Page
+
+h2> Introduction
+This is an example page written in MinTyML to demonstrate its simplicity and power.
+
+h2> Features
+ol {
+  > Concise Syntax
+  > Easy to Learn
+  > Flexible
+}
+
+h2> Inline Formatting
+
+MinTyML supports <#strong#>, </emphasis/>, <_underline_>, <~strikethrough~>,
+<"quote">, and <`code`> formatting.
+
+h2> Inferred Element Types
+section {
+  This is a paragraph within a section.
+
+  Another paragraph.
+}
+
+h2> Headings and Subheadings
+h3> Why Use MinTyML?
+MinTyML simplifies the process of writing and maintaining web documents.
+
+h2> Comments
+
+MinTyML allows you to add comments to your code that won't be displayed in the
+final document.
+<! This is a comment that will not be rendered !>
+```
+
+To put my money where my mouth is, I'm writing this blog post in MinTyML.
+
+h2> Background
+
+A couple months ago, I was writing up some documents in HTML started looking around to see if there
+was a more concise way to write HTML that let me focus on the text rather than the tags.
+After looking around, I didn't find quite what I was looking for.
+Markdown is an option since it can contain HTML, but in practice I found it unwieldy
+to go back and forth between HTML and Markdown syntax, needing blank lines in between,
+and having limitations on indenting.
+
+I began drafting my ideal alternative.
+The solution must:
+
+ol {
+  > Make HTML tags as concise as possible
+  > Infer HTML tags from context if possible
+  > Represent complex HTML structures
+}
+
+h2> Basic Syntax
+
+As I experimented with the syntax, I settled on a CSS selector-like approach, similar to
+<(a[href=https://www.emmet.io/]> Emmet)>.
+
+h3> Line Element
+
+The child combinator (<`>`>) denotes a <(dfn> line element)>,
+meaning the remainder of the line in addition to subsequent non-empty lines
+that don't contain elements belong inside that element:
+
+So this:
+
+```
+header>h1> Hello, world!
+```
+
+becomes this:
+
+```
+<header>
+  <h1>Hello, world! </h1>
+</header>
+```
+
+h4> Block Element
+
+Selectors followed by curly braces (<`{ ... }`>) form <(dfn> block elements)>,
+which may contain multiple child elements and wraps paragraphs in
+their own elements.
+
+MinTyML:
+
+<! cspell: disable !>
+```
+section {
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doeiusmod tempor
+  incididunt ut labore et dolore magna aliqua.
+
+  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+  aliquip ex ea commodo consequat.
+  Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+  eu fugiat nulla pariatur.
+
+  Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+  deserunt mollit anim id est laborum.
+}
+```
+
+HTML:
+
+```
+<section>
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doeiusmod tempor
+    incididunt ut labore et dolore magna aliqua.
+  </p>
+
+  <p>
+    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+    aliquip ex ea commodo consequat.
+    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+    eu fugiat nulla pariatur.
+  </p>
+</section>
+```
+<! cspell: enable !>
+
+The tags surrounding a paragraph vary depending on the parent element.
+For example, a list's paragraphs turn into list items.
+
+MinTyML:
+
+```
+ol {
+  Item 1
+
+  Item
+  2
+
+  And
+  Item 3
+}
+```
+
+HTML:
+
+```
+<ol>
+  <li>Item 1</li>
+  <li>Item 2</li>
+  <li>And Item 3</li>
+</ol>
+```
+
+h4> Line-Block Element
+
+When the child combinator and curly braces are used in conjunction (<`> { ... }`>)
+you get a <(dfn> line-block element)>.
+These elements may contain multiple child elements but have the semantics of a line element
+(for example, its contents are not broken into paragraphs).
+
+MinTyML:
+
+```
+section> {
+  Hello,
+
+  world!
+}
+```
+
+HTML
+
+```
+<section>Hello, world!</section>
+```
+
+h4> Inline Element
+
+Any of the above element types can be placed inside <`<( ... )>`> brackets
+to insert it without breaking the current paragraph or line element.
+
+MinTyML:
+
+```
+footer>Click <(a[href=http://example.com/]> here)> for more info.
+```
+
+HTML:
+
+```
+<footer>
+  Click <a href="http://example.com/">here</a> for more info.
+</footer>
+```
+
+h4> Inline Formatting
+
+Inline formatting tags map to specific HTML tags:
+
+table {
+  thead {
+    <(th> MinTyML)> <(th> HTML)>
+  }
+
+  {
+    > <`<#strong#>`>
+    > <`<strong>strong</strong>`>
+  }
+  {
+    > <`</emphasis/>`>
+    > <`<em>emphasis</em>`>
+  }
+  {
+    > <`<_underline_>`>
+    > <`<u>underline</u>`>
+  }
+  {
+    > <`<~strikethrough~>`>
+    > <`<s>strikethrough</s>`>
+  }
+  {
+    > <`<"quote">`>
+    > <`<q>quote</q>`>
+  }
+  {
+    > <(code> <[[<`code`>]]>)>
+    > <`<code>code</code>`>
+  }
+}
