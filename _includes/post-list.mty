@@ -1,7 +1,15 @@
 ul.post-list {
   {% for post in include.paginator.posts %}
-    li>article {
-      h3>a.post-link[href="{{ post.url | relative_url }}"]> {{ post.title | escape }}
+    li>article.preview {
+      hgroup {
+        h3>a.post-link[href="{{ post.url | relative_url }}"]> <[[{{ post.title }}]]>
+
+        {% if post.subtitle %}
+          > {
+            <[[{{ post.subtitle }}]]>
+          }
+        {% endif %}
+      }
 
       footer {
         {% include post-meta.mty post=post %}

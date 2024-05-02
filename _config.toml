@@ -70,3 +70,15 @@ title = "category: :cat"
 permalink = "/tags/:tag"
 layouts = ["home.mty"]
 title = "tag: :tag"
+
+
+[[defaults]]
+scope.path = ""
+[defaults.values.image]
+path = "/assets/social-preview.png"
+alt = "Site header"
+
+[[defaults]]
+scope.path = "**/_posts"
+[defaults.values.image]
+alt = "Post header"

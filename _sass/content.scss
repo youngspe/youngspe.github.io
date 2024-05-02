@@ -46,7 +46,34 @@
 }
 
 .block-item {
-    margin-block: var(--margin-y);
+    margin-block: 1em;
+}
+
+button {
+    background-color: var(--color-bg);
+    color: var(--color-fg);
+    border-radius: 1em;
+    border: $border-default;
+    box-shadow: $shadow-low;
+    padding: 0em 0.75em;
+    margin: 0.125em 0.25em;
+
+    &:hover {
+        color: var(--color-primary);
+        border-color: var(--color-primary);
+        box-shadow: $shadow-high;
+    }
+}
+
+
+button.share::before {
+    content: "\2BA3";
+    display: inline-block;
+    transform: scale(1.25);
+
+    @media not (max-width: $medium-width) {
+        content: "\2BA3  share";
+    }
 }
 
 article.post,
@@ -91,9 +118,13 @@ figure.highlight {
 }
 
 pre:not(.highlight *) {
-    @extend .inset
+    @extend .inset;
+    overflow: auto;
 }
 
+pre {
+    overflow: auto;
+}
 
 h1,
 h2,
@@ -125,7 +156,8 @@ a,
     text-shadow: 0 0.05em 0.1em transparent;
 }
 
-:any-link:hover, :any-link:focus {
+:any-link:hover,
+:any-link:focus {
     text-shadow: 0 0.07em 0.05em var(--color-shadow-heavy);
     color: currentColor;
 }
@@ -326,4 +358,48 @@ h6 {
 
 .float:nth-last-of-type(even) {
     @extend .float-start;
+}
+
+.post-image {
+    height: 12rem;
+    max-width: 33.33%;
+    min-width: 4rem;
+    float: inline-start;
+    object-fit: contain;
+    margin-inline: var(--margin-x-thin);
+    margin-block: var(--margin-y-thin);
+
+    &:is(article.preview *) {
+        height: 8rem;
+    }
+}
+
+table {
+    overflow: hidden;
+    margin-inline: auto;
+    background: var(--color-bg);
+    border-collapse: collapse;
+    border: thin solid var(--color-border);
+    box-shadow: $shadow-low;
+
+    th {
+        border: thin solid var(--color-border);
+    }
+
+    td,
+    th {
+        padding: var(--margin-y) var(--margin-x);
+    }
+
+    tbody>tr:nth-of-type(even) {
+        background: var(--color-bg-2);
+    }
+
+    thead>tr,
+    tr:not(:has(>td)) {
+        background: var(--color-alt-bg);
+        color: var(--color-alt-fg);
+        border: thin solid var(--color-border);
+        box-shadow: $shadow-low;
+    }
 }

@@ -2,6 +2,7 @@
 
 $dark-theme: (
     "bg": #162418,
+    "bg-2": #101f13,
     "fg": #e8e1d1,
     "alt-bg": #122a19,
     "alt-fg": #FFFFFF,
@@ -15,6 +16,7 @@ $dark-theme: (
 
 $light-theme: (
     "bg": #c8d6ac,
+    "bg-2": rgb(233, 245, 208),
     "fg": #041c11,
     "alt-bg": #adc283,
     "alt-fg": #02120e,
@@ -118,6 +120,7 @@ $code-font-family: 'Cascadia Code', ui-monospace, monospace;
 
 @mixin theme-colors($theme) {
     --color-bg: #{map.get($theme, "bg")};
+    --color-bg-2: #{map.get($theme, "bg-2")};
     --color-fg: #{map.get($theme, "fg")};
     --color-alt-bg: #{map.get($theme, "alt-bg")};
     --color-alt-fg: #{map.get($theme, "alt-fg")};

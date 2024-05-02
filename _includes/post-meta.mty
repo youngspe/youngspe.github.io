@@ -33,6 +33,12 @@
     }
     {% endif %}
 
+    span>button.share[
+        type=button
+        title="Share"
+        onclick='navigator.share({title: {{ include.post.title | jsonify }}, url: {{ include.post.url | absolute_url  | jsonify }} })'
+    ]>
+
     {% if include.post.categories.size > 0 %}
     span> {
         category:
@@ -61,5 +67,16 @@
         {% endfor %}
     }
     {% endif %}
-
 }
+
+{% if include.post.image.show %}
+img[
+    src={{ include.post.image.path | default: include.post.image | relative_url | jsonify }}
+    {% if include.post.image.alt %}
+    alt={{ include.post.image.alt | jsonify }}
+    {% endif %}
+    {% if include.post.image.title %}
+    title={{ include.post.image.title | jsonify }}
+    {% endif %}
+].post-image>
+{% endif %}
