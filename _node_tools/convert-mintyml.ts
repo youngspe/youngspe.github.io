@@ -10,7 +10,7 @@ async function throwIfTruthy(x: unknown): Promise<void> {
 }
 
 async function main() {
-    let stdin = process.openStdin().setEncoding('utf8')
+    let stdin = process.stdin.setEncoding('utf8')
     const converter = new MintymlConverter({ completePage: false, indent: 2 })
     const src = await consumers.text(stdin)
     const out = await converter.convert(src)
