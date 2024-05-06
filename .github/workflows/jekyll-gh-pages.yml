@@ -38,8 +38,7 @@ jobs:
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
           cache-version: 0 # Increment this number if you need to re-download cached gems
       - name: Build with Jekyll
-        shell: powershell
-        # Outputs to the './_site' directory by default
+        shell: pwsh
         run: ./_build_tools/build.ps1 -BaseUrl "${{ steps.pages.outputs.base_path }}"
         env:
           JEKYLL_ENV: production
