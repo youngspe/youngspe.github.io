@@ -3,7 +3,8 @@ layout: post
 title: Introducing MinTyML
 subtitle: A minimalist alternative syntax for HTML
 image:
-    path: https://raw.githubusercontent.com/youngspe/mintyml/main/assets/mintyml-logo.svg
+    path: projects/MinTyML/mintyml-logo-wide.png
+    displayPath: https://raw.githubusercontent.com/youngspe/mintyml/main/assets/mintyml-logo.svg
     title: MinTyML Logo
     show: true
 date: 2024-05-06T10:00

@@ -77,7 +77,7 @@
 
 {% if include.post.image.show %}
 img[
-    src={{ include.post.image.path | default: include.post.image | relative_url | jsonify }}
+    src={{ include.post.image.displayPath | default: include.post.image.path | default: include.post.image | relative_url | jsonify }}
     {% if include.post.image.alt %}
     alt={{ include.post.image.alt | jsonify }}
     {% endif %}
