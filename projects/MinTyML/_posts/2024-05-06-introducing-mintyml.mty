@@ -1,35 +1,45 @@
 ---
 layout: post
 title: Introducing MinTyML
-subtitle: Minimalist alternative syntax for HTML
+subtitle: A minimalist alternative syntax for HTML
 image:
     path: https://raw.githubusercontent.com/youngspe/mintyml/main/assets/mintyml-logo.svg
     title: MinTyML Logo
     show: true
-date: 2024-05-02T10:00
+date: 2024-05-06T10:00
 links:
   - text: Playground/Demo
     url: https://youngspe.github.io/mintyml
+    class: icon-playground
   - github:
       user: youngspe
       repo: mintyml
   - npm:
       package: mintyml
+tags:
+  - rust
+  - wasm
+  - typescript
 ---
 <! cspell: disable !>
 MinTyML (from <(dfn> <_Min_>imalist H<_TML_>)>) is an alternative
 <! cspell: enable !>
 syntax for HTML designed for writing text-heavy documents.
 
-You can play with the
-<(a[href=https://youngspe.github.io/mintyml]> live demo)>,
+You can play with the WASM-powered
+<(a[href=https://youngspe.github.io/mintyml]> interactive demo)>,
 or check out the
 <(a[href=https://github.com/youngspe/mintyml]> Github repository)>
-with a full README
-and information on the Rust-based MinTyML CLI,
-the <`mintyml`> Rust crate,
-the <`mintyml`> NPM package,
-and the MinTyML VSCode extension.
+with a full README explaining MinTyML in further detail.
+
+See also the
+<(a[href=https://github.com/youngspe/mintyml/tree/main/minty-cli]> MinTyML CLI)>,
+the
+<(a[href=https://docs.rs/mintyml/latest/mintyml/]> <`mintyml`> Rust crate)>,
+the
+<(a[href=https://www.npmjs.com/package/mintyml]> <`mintyml`> NPM package)>,
+and the
+<(a[href="https://marketplace.visualstudio.com/items?itemName=youngspe.mintyml"]> MinTyML VSCode extension)>.
 
 Here's a quick sample:
 
@@ -114,7 +124,7 @@ becomes this:
 </header>
 ```
 
-h4> Block Element
+h3> Block Element
 
 Selectors followed by curly braces (<`{ ... }`>) form <(dfn> block elements)>,
 which may contain multiple child elements and wraps paragraphs in
@@ -184,7 +194,7 @@ HTML:
 </ol>
 ```
 
-h4> Line-Block Element
+h3> Line-Block Element
 
 When the child combinator and curly braces are used in conjunction (<`> { ... }`>)
 you get a <(dfn> line-block element)>.
@@ -207,7 +217,7 @@ HTML
 <section>Hello, world!</section>
 ```
 
-h4> Inline Element
+h3> Inline Element
 
 Any of the above element types can be placed inside <`<( ... )>`> brackets
 to insert it without breaking the current paragraph or line element.
@@ -226,7 +236,7 @@ HTML:
 </footer>
 ```
 
-h4> Inline Formatting
+h3> Inline Formatting
 
 Inline formatting tags map to specific HTML tags:
 
@@ -260,3 +270,21 @@ table {
     > <`<code>code</code>`>
   }
 }
+
+h2> What's next?
+
+Next I'd like to provide MinTyML libraries for additional languages and frameworks.
+For example, the custom MinTyML plugin I've made for this site should be available for everyone.
+
+This will require a formal definition of the MinTyML syntax,
+and a clearer explanation of how inferred element types are resolved.
+
+
+h2> Conclusion
+
+The quickest way to get a feel for MinTyML is to try the examples in the
+<(a[href=https://youngspe.github.io/mintyml]> interactive demo)>.
+If you'd like to be involved,
+feel free to open an <(a[href=https://github.com/youngspe/mintyml/issues]> issue)>
+or reach out to me at
+<(a[href=mailto:youngspe@outlook.com]> youngspe@outlook.com)>.
