@@ -22,10 +22,11 @@
 }
 
 .post-meta {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-evenly;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(10rem, 50%), 1fr));
+    grid-auto-flow: dense row;
     align-items: baseline;
+    justify-items: center;
     font-size: 0.875rem;
     margin-inline: -0.5em;
 
@@ -37,20 +38,28 @@
         display: flex;
         flex-flow: row wrap;
         justify-content: space-evenly;
+        justify-self: stretch;
         align-items: baseline;
+        grid-column-end: span 2;
+
 
         >* {
             @extend .pill;
             display: block;
         }
     }
+
+    button.icon-share {
+        justify-self: end;
+        grid-column-end: -1;
+    }
 }
 
 .post-list .post-meta {
-    justify-content: space-between;
+    justify-items: start;
 
     >* {
-        justify-content: start;
+        justify-content: center;
     }
 }
 

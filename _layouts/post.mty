@@ -3,7 +3,7 @@ layout: default
 ---
 {% convert .mty to .html %}
 article.post.h-entry[itemscope itemtype=http://schema.org/BlogPosting] {
-  header.post-header {
+  header.post-header>hgroup {
     h1.post-tile.p-name[itemprop="name headline"]> {{ page.title | escape }}
 
     {% if page.subtitle %}

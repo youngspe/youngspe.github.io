@@ -14,7 +14,13 @@
         {% for link in include.post.links %}
 
         {% if link.text %}
-        <(a[href="{{ link.url }}"]> {{ link.text }} )>
+        <(a[href="{{ link.url }}"]> {
+            {% for class in link.class %}
+            span.link-icon.{{class}}>
+            {% endfor %}
+
+            {{ link.text }}
+        })>
         {% endif %}
 
         {% if link.github %}
@@ -33,19 +39,13 @@
     }
     {% endif %}
 
-    span>button.share[
-        type=button
-        title="Share"
-        onclick='navigator.share({title: {{ include.post.title | jsonify }}, url: {{ include.post.url | absolute_url  | jsonify }} })'
-    ]>
-
     {% if include.post.categories.size > 0 %}
     span> {
         category:
 
         {% for cat in include.post.categories %}
         {% capture cat_url -%}
-        /{{ cat | uri_escape }}
+        /{{ cat | downcase | uri_escape }}
         {%- endcapture %}
 
         a[href="{{ cat_url | relative_url }}"]> {{ cat }}
@@ -60,13 +60,19 @@
     span.post-links> {
         {% for tag in include.post.tags %}
         {% capture tag_url -%}
-        /tags/{{ tag | uri_escape }}
+        /tags/{{ tag | downcase | uri_escape }}
         {%- endcapture %}
 
         <(a.tag-link[href="{{ tag_url | relative_url }}"]> {{ tag }} )>
         {% endfor %}
     }
     {% endif %}
+
+    button.icon-share[
+        type=button
+        title="Share"
+        onclick='navigator.share({title: {{ include.post.title | jsonify }}, url: {{ include.post.url | absolute_url  | jsonify }} })'
+    ]>
 }
 
 {% if include.post.image.show %}

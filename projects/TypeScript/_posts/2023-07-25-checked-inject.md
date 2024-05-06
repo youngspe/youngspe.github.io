@@ -18,7 +18,10 @@ links:
       package: checked-inject
   - text: documentation
     url: https://youngspe.github.io/checked-inject/
-
+    class:
+      - icon-docs
+tags:
+  - typescript
 ---
 
 This started as personal learning experiment to create a dependency injection library.

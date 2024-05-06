@@ -6,47 +6,59 @@
     hyphenate-limit-chars: 6;
 }
 
-.container {
+:focus-visible {
+    outline: var(--color-primary) 0.25ch solid;
+}
+
+@mixin container {
     overflow: hidden;
     padding: $margin-default;
 
     >:first-child,
-    >:first-child:is(header, footer, section)>:first-child {
+    >:first-child:is(header, footer, section, hgroup)>:first-child {
         margin-block-start: 0;
     }
 
     >:last-child,
-    >:last-child:is(header, footer, section)>:last-child {
+    >:last-child:is(header, footer, section, hgroup)>:last-child {
         margin-block-end: 0;
     }
 }
 
-.card {
-    @extend .container;
-    @extend .block-item;
+@mixin block-item {
+    margin-block: 1em;
+}
+
+
+.container {
+    @include container;
+}
+
+@mixin card {
+    @include container;
+    @include block-item;
     border-radius: var(--radius);
     border: $border-default;
     box-shadow: $shadow-low;
     transition: 0.125s ease-out;
     transition-property: margin, padding;
+
+
+    @media (max-width: $xsmall-width) {
+        border: none;
+    }
 }
 
-.slim-card {
-    @extend .card;
-    border-radius: var(--radius-small);
-    padding: var(--margin-y-thin) var(--margin-x-thin);
+.card {
+    @include card;
 }
 
-.inset {
-    @extend .container;
+@mixin inset {
+    @include container;
     border-radius: var(--radius-small);
     box-shadow: inset $shadow-low;
     margin-block: var(--margin-y);
     border: $border-subtle;
-}
-
-.block-item {
-    margin-block: 1em;
 }
 
 button {
@@ -58,27 +70,37 @@ button {
     padding: 0em 0.75em;
     margin: 0.125em 0.25em;
 
-    &:hover {
-        color: var(--color-primary);
-        border-color: var(--color-primary);
-        box-shadow: $shadow-high;
+    &:enabled {
+        border-color: var(--color-fg);
+        cursor: pointer;
+
+        &:hover,
+        &:focus {
+            color: var(--color-primary);
+            border-color: var(--color-primary);
+            box-shadow: $shadow-high;
+        }
+
+        &:active {
+            box-shadow: inset $shadow-low;
+            opacity: 0.85;
+        }
     }
 }
 
-
-button.share::before {
-    content: "\2BA3";
-    display: inline-block;
-    transform: scale(1.25);
-
-    @media not (max-width: $medium-width) {
-        content: "\2BA3  share";
+@media not (max-width: $medium-width) {
+    button.icon-share::after {
+        content: "share";
     }
+}
+
+.link-icon {
+    color: var(--color-fg);
 }
 
 article.post,
 .post-list article {
-    @extend .card;
+    @include card;
 }
 
 pre.highlight,
@@ -88,7 +110,7 @@ figure.highlight {
 }
 
 figure:not(.highlight) {
-    @extend .card;
+    @include card;
     border-radius: var(--radius-small);
     margin-inline: var(--margin-x-thin);
 
@@ -106,7 +128,7 @@ figure.highlight {
 }
 
 .highlight:has(>pre) {
-    @extend .inset;
+    @include inset;
     padding: 0;
 }
 
@@ -118,7 +140,7 @@ figure.highlight {
 }
 
 pre:not(.highlight *) {
-    @extend .inset;
+    @include inset;
     overflow: auto;
 }
 
@@ -138,10 +160,8 @@ ol,
 menu,
 figure,
 pre,
-blockquote,
-.inset,
-.card {
-    @extend .block-item;
+blockquote {
+    @include block-item;
 }
 
 code {
@@ -156,6 +176,13 @@ a,
     text-shadow: 0 0.05em 0.1em transparent;
 }
 
+p a,
+p :any-link {
+    text-decoration: underline;
+}
+
+a:hover,
+a:focus,
 :any-link:hover,
 :any-link:focus {
     text-shadow: 0 0.07em 0.05em var(--color-shadow-heavy);
@@ -195,11 +222,11 @@ figcaption {
 }
 
 .heading+*,
-.heading+:is(header, footer, section)>* {
+.heading+:is(header, footer, section, hgroup)>* {
     margin-block-start: 0;
 }
 
-header:has(>h1)::after {
+header:has(h1)::after {
     content: '';
     border-block-end: thin solid var(--color-border);
     width: 75%;

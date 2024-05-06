@@ -1,0 +1,5 @@
+# https://iconoir.com/
+share=regular/arrow-email-forward
+docs=regular/book
+playground=regular/gamepad
+tag=regular/hashtag
