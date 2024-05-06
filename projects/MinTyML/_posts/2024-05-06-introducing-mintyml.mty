@@ -47,9 +47,11 @@ Here's a quick sample:
 h1> MinTyML Example Page
 
 h2> Introduction
+
 This is an example page written in MinTyML to demonstrate its simplicity and power.
 
 h2> Features
+
 ol {
   > Concise Syntax
   > Easy to Learn
@@ -69,7 +71,9 @@ section {
 }
 
 h2> Headings and Subheadings
+
 h3> Why Use MinTyML?
+
 MinTyML simplifies the process of writing and maintaining web documents.
 
 h2> Comments
@@ -79,7 +83,8 @@ final document.
 <! This is a comment that will not be rendered !>
 ```
 
-To put my money where my mouth is, I'm writing this blog post in MinTyML.
+To put my money where my mouth is, I'm
+<(a[href=https://github.com/youngspe/youngspe.github.io/blob/main/projects/MinTyML/_posts/2024-05-06-introducing-mintyml.mty]> writing this blog post in MinTyML)>.
 
 h2> Background
 
