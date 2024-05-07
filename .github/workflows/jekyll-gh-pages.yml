@@ -26,17 +26,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - run: npm install
       - run: npm run build
-      - name: Setup Pages
-        uses: actions/configure-pages@v3
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1.172.0
         with:
           ruby-version: '3.1' # Not needed with a .ruby-version file
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
           cache-version: 0 # Increment this number if you need to re-download cached gems
+      - name: Cache Icons
+        uses: actions/cache@v4
+        with:
+          path: assets/iconoir
+          key: iconoir
       - name: Build with Jekyll
         shell: pwsh
         run: ./_build_tools/build.ps1 -BaseUrl "${{ steps.pages.outputs.base_path }}"
