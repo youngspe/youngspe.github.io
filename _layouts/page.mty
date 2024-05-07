@@ -1,16 +1,16 @@
 ---
 layout: default
 ---
-{% convert .mty to .html %}
+{% render_mintyml %}
 article.page {
   header {
-    h1.post-title> {{ page.title | escape }}
+    h1.post-title> {{ page.title | mintyml_escape }}
 
     {% if page.subtitle %}
-    .subtitle> {{ page.subtitle | escape }}
+    .subtitle> {{ page.subtitle | mintyml_escape }}
     {% endif %}
   }
 
   <[raw[{{ content }}]]>
 }
-{% endconvert %}
+{% endrender_mintyml %}

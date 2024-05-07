@@ -28,7 +28,7 @@ future = true
 timezone = "America/Los_Angeles"
 date-format = "%B %-d, %Y"
 
-plugins = ["jekyll-seo-tag", "jekyll-sass-converter", "jekyll-paginate-v2"]
+plugins = ["jekyll-seo-tag", "jekyll-sass-converter", "jekyll-paginate-v2", "mintyml-jekyll"]
 
 exclude = ["node_modules/"]
 

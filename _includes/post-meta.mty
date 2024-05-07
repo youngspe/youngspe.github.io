@@ -71,18 +71,18 @@
     button.icon-share[
         type=button
         title="Share"
-        onclick='navigator.share({title: {{ include.post.title | jsonify }}, url: {{ include.post.url | absolute_url  | jsonify }} })'
+        onclick='navigator.share({title: {{ include.post.title | jsonify }}, url: {{ include.post.url | absolute_url | jsonify }} })'
     ]>
 }
 
 {% if include.post.image.show %}
 img[
-    src={{ include.post.image.displayPath | default: include.post.image.path | default: include.post.image | relative_url | jsonify }}
+    src="{{ include.post.image.displayPath | default: include.post.image.path | default: include.post.image | relative_url | mintyml_escape }}"
     {% if include.post.image.alt %}
-    alt={{ include.post.image.alt | jsonify }}
+    alt="{{ include.post.image.alt | mintyml_escape }}"
     {% endif %}
     {% if include.post.image.title %}
-    title={{ include.post.image.title | jsonify }}
+    title="{{ include.post.image.title | mintyml_escape }}"
     {% endif %}
 ].post-image>
 {% endif %}

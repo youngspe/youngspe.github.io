@@ -1,13 +1,13 @@
 ---
 layout: default
 ---
-{% convert .mty to .html %}
+{% render_mintyml %}
 article.post.h-entry[itemscope itemtype=http://schema.org/BlogPosting] {
   header.post-header>hgroup {
-    h1.post-tile.p-name[itemprop="name headline"]> {{ page.title | escape }}
+    h1.post-tile.p-name[itemprop="name headline"]> {{ page.title | mintyml_escape }}
 
     {% if page.subtitle %}
-    p.subtitle> {{ page.subtitle | escape }}
+    p.subtitle> {{ page.subtitle | mintyml_escape }}
     {% endif %}
   }
 
@@ -17,4 +17,4 @@ article.post.h-entry[itemscope itemtype=http://schema.org/BlogPosting] {
 
   <[raw[ {{ content }} ]]>
 }
-{% endconvert %}
+{% endrender_mintyml %}

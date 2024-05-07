@@ -1,24 +1,24 @@
 ---
 layout: default
 ---
-{% convert .mty to .html %}
+{% render_mintyml %}
 
 header.home-header {
   {% if page.title %}
-  h1.page-heading> {{ page.title }}
+  h1.page-heading> {{ page.title | mintyml_escape }}
   {% endif %}
 
   {% if page.subtitle %}
-  .subtitle> {{ page.subtitle }}
+  .subtitle> {{ page.subtitle | mintyml_escape }}
   {% endif %}
 }
 
 section> <[raw[{{ content }}]]>
 
 section {
-  h2.post-list-heading> {{ page.list_title | default: "Posts" }}
+  h2.post-list-heading> {{ page.list_title | mintyml_escape | default: "Posts" }}
 
   {% include post-list.mty paginator=paginator %}
 }
 
-{% endconvert %}
+{% endrender_mintyml %}
