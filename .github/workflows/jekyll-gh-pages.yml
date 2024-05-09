@@ -43,7 +43,7 @@ jobs:
           key: iconoir
       - name: Build with Jekyll
         shell: pwsh
-        run: ./_build_tools/build.ps1 -BaseUrl "${{ steps.pages.outputs.base_url }}"
+        run: ./_build_tools/build.ps1 -BaseUrl "${{ steps.pages.outputs.base_path }}"
         env:
           JEKYLL_ENV: production
       - name: Upload artifact
