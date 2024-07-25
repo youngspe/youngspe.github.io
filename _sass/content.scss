@@ -114,7 +114,8 @@ figure:not(.highlight) {
     border-radius: var(--radius-small);
     margin-inline: var(--margin-x-thin);
 
-    >img {
+    >img,
+    >picture>img {
         display: block;
         border-radius: var(--radius-small);
         box-shadow: $shadow-low;
@@ -273,7 +274,7 @@ article>section {
 
     img {
         max-width: 100%;
-        max-height: min(96vh, 50vmax);
+        max-height: min(96vh, 75vmax);
     }
 
     &,
@@ -292,7 +293,8 @@ article>section {
             clear: none;
         }
 
-        >img {
+        >img,
+        >picture>img {
             display: block;
             max-width: 100%;
             max-height: min(96vh, 50vmax);
@@ -429,4 +431,14 @@ table {
         border: thin solid var(--color-border);
         box-shadow: $shadow-low;
     }
+}
+
+dfn,
+abbr {
+    font-style: italic;
+    font-weight: inherit;
+}
+
+dfn abbr {
+    font-weight: bold;
 }

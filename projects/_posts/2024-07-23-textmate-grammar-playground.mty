@@ -1,0 +1,134 @@
+---
+layout: post
+title: TmLanguage and TmTheme playground
+subtitle: Quickly preview TextMate syntaxes and themes
+links:
+  - text: playground
+    url: https://youngspe.github.io/textmate-grammar-playground
+    class: icon-playground
+  - github:
+      user: youngspe
+      repo: textmate-grammar-playground
+tags:
+  - typescript
+---
+
+This is a little project I cooked up quickly while working on making some changes to a
+TextMate language syntax for use with VSCode.
+<(a[href=https://youngspe.github.io/textmate-grammar-playground]> See it in action here)>.
+
+a[href=https://youngspe.github.io/textmate-grammar-playground]>picture {
+  source[
+    media='(prefers-color-scheme: dark)'
+    srcset="{{ '/assets/img/projects/tm-playground/screenshot-dark.png' | relative_url }}"
+  ]>
+  img[
+    src="{{ '/assets/img/projects/tm-playground/screenshot.png' | relative_url }}"
+    alt="Screenshot of the playground"
+  ]>
+}
+
+h2> Overview
+
+A <(dfn> TextMate language grammar (<(abbr> TmLanguage)>))> describes a language's syntax for the purpose of syntax highlighting.
+It's not generally expected to produce a complete parse tree, but rather provide context locally so a syntax highlighter
+knows what </kind/> of syntax is being used at a given location in the source.
+Patterns are defined with regular expressions and assigned nested <(dfn> scopes)>,
+which are used by the theme to apply colors to various parts of the source code.
+
+A <(dfn> TextMate color scheme (<(abbr> TmTheme)>))> assigns colors to source code tokens
+based on what kind of syntactic form they represent.
+It does so by applying settings for tokens matching a given set of <(i> scopes)> defined by the language grammar.
+Themes are generally language-agnostic because TmLanguage scopes generalize fairly well.
+For example, a string in any language is likely to have a scope beginning with <`string.*`>.
+
+This application takes a TmLanguage and a TmTheme (optional; a default theme will be used if one isn't specified)
+and uses them to highlight a given section of code. There are several presets available for both languages and themes.
+The UI here is nothing special; it's quick and dirty and I'm no designer.
+It's really just for pasting themes, grammars, and source code into to see how they look.
+
+h2> Input
+
+The UI has three primary inputs:
+
+ul {
+  > the <(i> TmLanguage)> box
+  > the <(i> TmTheme)> box
+  > the <(i> Example code)> box
+}
+
+h3> TmLanguage
+
+The <(dfn> TmLanguage)> box accepts a
+<(a[href=https://macromates.com/manual/en/language_grammars]> TextMate Language Grammar)>
+in YAML, JSON, or XML plist format.
+
+h3> TmTheme
+
+The <(dfn> TmTheme)> box accepts a
+<(a[href=https://www.sublimetext.com/docs/color_schemes_tmtheme.html]> TextMate color scheme)>
+or a
+<(a[href=https://code.visualstudio.com/api/extension-guides/color-theme#create-a-new-color-theme]> VS Code theme)>
+in YAML, JSON, or XML plist format.
+
+h3> Example code
+
+The <(dfn> Example code)> box accepts any text. Whatever you type here will parsed with <(i> TmLanguage)> and displayed in the <(i> Rendered)> box.
+
+h2> Variables
+
+Inspired by the
+<(a[
+  href=https://github.com/microsoft/TypeScript-TmLanguage/blob/master/TypeScript.YAML-tmLanguage
+]> official TypeScript TextMate grammar)>,
+TmLanguages and TmThemes displayed using this tool may optionally have a top-level <`variables`> property
+containing a map of variable names to variable values.
+Before handing the grammar or theme off to the syntax highlighter, references to those variables wrapped in double curly braces will be replaced with that variable's value.
+
+figure {
+  {% highlight yaml %}
+name: Simple Grammar
+scopeName: source.simple
+
+variables:
+  ident: '(?:\b(?!\d)\w+\b)'
+
+patterns:
+  - include: '#expressions'
+
+repository:
+  expressions:
+    patterns:
+      - name: meta.function.call.simple
+        begin: '({{ ident }}\s*)?\('
+        end: '\)'
+        beginCaptures:
+          1: { name: entity.name.function.simple }
+        patterns:
+          - include: '#expressions'
+          - match: ','
+
+      - name: variable.other.simple
+        match: '{{ ident }}'
+
+  {% endhighlight %}
+
+  figcaption> The <`ident`> variable eliminates the need to state <`\b(?!\d)\w+\b`> in multiple patterns.
+}
+
+This is <#not#> a feature of TextMate language definitions;
+to use this in your projects you'll need some additional processing
+<(a[href=https://github.com/microsoft/TypeScript-TmLanguage/blob/master/build/build.ts]>like this)>.
+
+h2> Output
+
+h3> Rendered code
+
+The <(dfn> Rendered)> box displays the contents of <(i> Example code)> as parsed by the given TmLanguage
+and colored by the given TmTheme (or a default theme is the TmTheme box is empty).
+
+h3> Scopes
+
+Select any token in the rendered code, and the scopes applied to that token by the TmLanguage
+will be displayed below.
+This allows you to quickly troubleshoot language structures being highlighted incorrectly.
