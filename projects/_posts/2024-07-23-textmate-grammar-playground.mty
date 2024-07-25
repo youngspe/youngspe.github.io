@@ -86,7 +86,7 @@ containing a map of variable names to variable values.
 Before handing the grammar or theme off to the syntax highlighter, references to those variables wrapped in double curly braces will be replaced with that variable's value.
 
 figure {
-  {% highlight yaml %}
+  {% highlight yaml %}{% raw %}
 name: Simple Grammar
 scopeName: source.simple
 
@@ -111,7 +111,7 @@ repository:
       - name: variable.other.simple
         match: '{{ ident }}'
 
-  {% endhighlight %}
+  {% endraw %}{% endhighlight %}
 
   figcaption> The <`ident`> variable eliminates the need to state <`\b(?!\d)\w+\b`> in multiple patterns.
 }
